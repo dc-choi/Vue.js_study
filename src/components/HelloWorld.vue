@@ -11,13 +11,13 @@
       {{ count }}
     </div>
     <div>
-      <span v-bind:title="messege">올려두면 정보를 띄웁니다.</span>
-      <div v-bind:id="dynamicId">qwer</div>
-      <button v-bind:disabled="isButtonDisabled">Button</button>
+      <span :title="messege">올려두면 정보를 띄웁니다.</span>
+      <div :id="dynamicId">qwer</div>
+      <button :disabled="isButtonDisabled">Button</button>
     </div>
     <div>
       {{ name }}
-      <button v-on:click="setReverseName()">reverse name</button>
+      <button @click="setReverseName()">reverse name</button>
     </div>
     <div>
       {{ data }}
@@ -47,6 +47,40 @@
       {{ number + 1 }}
       {{ ok ? "YES" : "NO" }}
     </div>
+    <div>
+      <!--
+        디렉티브
+        v-로 시작하는 특수한 속성입니다. 디렉티브 속성 값은 단일 JavaScript 표현식이 됩니다.
+        (나중에 설명할 v-for와 v-on은 예외입니다.)
+        디렉티브의 역할은 표현식의 값이 변경될 때 발생하는 부수 효과(side effects)들을 반응적으로 DOM에 적용하는 것입니다.
+
+        v-if 디렉티브는 표현식 값의 참, 거짓 여부를 바탕으로 엘리먼트를 삽입하거나 제거합니다.
+      -->
+      <a :href="url"> ... </a>
+      <!--
+        일부 디렉티브는 디렉티브명 뒤에 콜론(:)으로 표기되는 전달인자를 가질 수 있습니다. 예를 들어, v-bind 디렉티브는 반응적으로 HTML 속성을 갱신하는 데 사용합니다.
+        여기서 href는 전달인자로, v-bind 디렉티브가 표현식 url의 값을 엘리먼트의 href 속성에 바인딩하도록 지시합니다.
+
+        또 다른 예로는 DOM 이벤트를 수신하는 v-on 디렉티브가 있습니다.
+
+        JavaScript 표현식을 대괄호로 묶어 디렉티브 전달인자로 사용할 수도 있습니다.
+      -->
+      <a :[attributeName]="url"> ... </a>
+    </div>
+    <div>
+      <!--
+        약어
+        v- 접두어는 템플릿에서 Vue 특정 속성을 식별하기 위한 시각적 신호 역할을 합니다.
+        이 기능은 Vue.js를 사용하여 기존 마크업에 동적인 동작을 적용할 때 유용하지만,
+        일부 자주 사용되는 디렉티브에 대해 장황하다고 느껴질 수 있습니다.
+
+        v-bind와 v-on은 특별한 약어를 제공합니다.
+      -->
+      <!-- 약어 -->
+      <a :href="url"> ... </a>
+      <!-- 약어 -->
+      <a @click="doSomething"> ... </a>
+    </div>
   </div>
 </template>
 
@@ -73,6 +107,8 @@ export default {
       isButtonDisabled: true, // null, undefined
       number: 1,
       ok: true,
+      url: `#`,
+      attributeName: `href`,
     };
   },
   methods: {
