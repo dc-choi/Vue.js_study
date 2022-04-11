@@ -45,7 +45,7 @@
     <!-- {{}} 안에 JS 표현식으로 사용 가능 -->
     <div>
       {{ number + 1 }}
-      {{ ok ? "YES" : "NO" }}
+      {{ checkOK }}
     </div>
     <div>
       <!--
@@ -149,6 +149,18 @@ export default {
       this.name = this.name.split("").reverse().join("");
     },
   },
+  // 반응형 데이터를 다루는 부분은 computed 속성에 추가하면 유용함.
+  // 다른 방법으로 Watch라는 속성이 있는데 공식문서상에서는 computed를 권고함.
+  computed: {
+    checkOK() {
+      return this.ok ? "yes" : "no";
+    },
+  },
+  /*
+  computed와 methods의 차이점
+  computed 속성은 반응형(reactive) 종속성에 기반하여 캐시됨. 반응형 종속성 중 일부가 변경된 경우에만 재평가됩니다.
+  methods 속성은 랜더링이 될때마다 항상 함수를 실행함.
+  */
   mounted() {
     setInterval(() => {
       this.count++;
